@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>DisplayFormat.Table.Default</Name>
+      <ViewSelectedBy>
+        <TypeName>Display</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Display ID</Label>
+            <Width>12</Width>
+            <Alignment>Left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Description</Label>
+            <Width>22</Width>
+            <Alignment>Left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Active</Label>
+            <Width>7</Width>
+            <Alignment>Left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Enabled</Label>
+            <Width>8</Width>
+            <Alignment>Left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Primary</Label>
+            <Width>8</Width>
+            <Alignment>Left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Resolution</Label>
+            <Width>20</Width>
+            <Alignment>Left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>HDR Info</Label>
+            <Width>22</Width>
+            <Alignment>Left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Position</Label>
+            <Width>10</Width>
+            <Alignment>Left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Recommended Resolution</Label>
+            <Width>24</Width>
+            <Alignment>Left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Source</Label>
+            <Width>28</Width>
+            <Alignment>Left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Target</Label>
+            <Width>28</Width>
+            <Alignment>Left</Alignment>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Description</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Active</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Enabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Primary</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  if ($_.Resolution) { ($_.Resolution | Format-List | Out-String).Trim() }
+                  else {"N/A"}
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  if ($_.HdrInfo) { ($_.HdrInfo | Format-List | Out-String).Trim() }
+                  else {"N/A"}
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  if ($_.Position) { ($_.Position | Format-List | Out-String).Trim() }
+                  else {"N/A"}
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  if ($_.RecommendedResolution) {($_.RecommendedResolution | Format-List -Property Width, Height | Out-String).Trim()}
+                  else {"N/A"}
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  ($_.Source | Format-List | Out-String).Trim()
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  if ($_.Target) {($_.Target | Format-List -Property Id, FriendlyName, ConnectionType | Out-String).Trim()} 
+                  else {"None"}
+                </ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+            <Wrap>true</Wrap>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

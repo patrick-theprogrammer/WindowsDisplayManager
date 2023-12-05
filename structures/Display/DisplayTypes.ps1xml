@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+  <Type>
+    <Name>Display</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>Id</Name>
+        <GetScriptBlock>
+            if ($this.Target) { "$($this.Source.Id)-$($this.Target.Id)" }
+            else { $this.Source.Id }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Description</Name>
+        <GetScriptBlock>
+            if ($this.Target) { "$($this.Target.FriendlyName) via $($this.Source.Description)" } 
+            else { "Unconnected $($this.Source.Description) source" }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Active</Name>
+        <GetScriptBlock>
+            $this.Source._GetIsActive()
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Enabled</Name>
+        <GetScriptBlock>
+            $this._GetIsEnabled()
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Primary</Name>
+        <GetScriptBlock>
+            $this.Source._GetIsPrimary()
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Resolution</Name>
+        <GetScriptBlock>
+            $this.Source._GetResolution()
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>HdrInfo</Name>
+        <GetScriptBlock>
+            if ($this.Target) { $this.Target._GetHdrInfo() }
+            else { $null }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Position</Name>
+        <GetScriptBlock>
+            $this.Source._GetPosition()
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>RecommendedResolution</Name>
+        <GetScriptBlock>
+            if ($this.Target) { $this.Target._GetRecommendedResolution() }
+            else { $null }
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+</Types>
