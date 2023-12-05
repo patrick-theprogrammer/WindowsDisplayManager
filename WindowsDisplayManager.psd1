@@ -116,10 +116,10 @@ PrivateData = @{
         )
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        # LicenseUri = 'https://github.com/patrick-theprogrammer/WindowsDisplayManager/blob/main/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = 'TODO Github'
+        # ProjectUri = 'https://github.com/patrick-theprogrammer/WindowsDisplayManager'
 
         # A URL to an icon representing this module.
         # IconUri = ''
