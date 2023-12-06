@@ -122,7 +122,7 @@ PrivateData = @{
         # ProjectUri = 'https://github.com/patrick-theprogrammer/WindowsDisplayManager'
 
         # A URL to an icon representing this module.
-        # IconUri = ''
+        # IconUri = 'https://github.com/patrick-theprogrammer/WindowsDisplayManager/blob/main/assets/logo.png?raw=true'
 
         # ReleaseNotes of this module
         # ReleaseNotes = ''
