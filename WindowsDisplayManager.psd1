@@ -11,7 +11,7 @@
 RootModule = 'WindowsDisplayManager.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.2'
+ModuleVersion = '1.0.3'
 
 # ID used to uniquely identify this module
 GUID = '79bd140c-f252-4e22-8675-43be3f934c48'
