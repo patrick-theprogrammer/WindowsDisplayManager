@@ -157,12 +157,14 @@ function UpdateDisplaysFromFile() {
     param(
         [string]$filePath,
         # Option of whether to disable any currently enabled displays which are not present in the specified display states
-        [switch]$disableNotSpecifiedDisplays
+        [switch]$disableNotSpecifiedDisplays,
+        # Option of whether to double check that all updates occurred as expected after windows reports everything was successful
+        [switch]$validate
     )
 
     $displayStates = LoadDisplayStatesFromFile -filePath $filePath
     if (-not $displayStates) { return $false }
-    return UpdateDisplaysToStates -displayStates $displayStates -disableNotSpecifiedDisplays:$disableNotSpecifiedDisplays
+    return UpdateDisplaysToStates -displayStates $displayStates -disableNotSpecifiedDisplays:$disableNotSpecifiedDisplays -validate:$validate
 }
 
 function UpdateDisplaysToStates() {

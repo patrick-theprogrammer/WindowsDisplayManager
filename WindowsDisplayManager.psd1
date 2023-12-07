@@ -125,6 +125,5 @@ PrivateData = @{
 }
 
 # HelpInfo URI of this module
-# TODO add developer API documentation for this module
-# HelpInfoURI = ''
+HelpInfoURI = 'https://github.com/patrick-theprogrammer/WindowsDisplayManager/wiki/WindowsDisplayManager-Wiki'
 }
