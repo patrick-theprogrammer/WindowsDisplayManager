@@ -1,0 +1,9 @@
+# Metadata for VS Code
+.vscode/
+
+# Metadata for .NET Debugging
+lib/Win32Interop/bin/
+lib/Win32Interop/obj/
+
+# Script to work around some powershell publishing bugs
+publish.ps1

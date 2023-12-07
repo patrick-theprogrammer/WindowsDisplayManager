@@ -11,7 +11,7 @@
 RootModule = 'WindowsDisplayManager.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0'
+ModuleVersion = '1.0.2'
 
 # ID used to uniquely identify this module
 GUID = '79bd140c-f252-4e22-8675-43be3f934c48'
@@ -26,25 +26,10 @@ CompanyName = 'N/A'
 Copyright = '(c) 2023 Patrick Fieldson. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'Manager module to read and set monitor specific and general graphics settings.'
+Description = 'Manager module to get and set Windows display settings. Supports resolution, enablement, HDR, and more.'
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '5.1'
-
-# Name of the Windows PowerShell host required by this module
-# PowerShellHostName = ''
-
-# Minimum version of the Windows PowerShell host required by this module
-# PowerShellHostVersion = ''
-
-# Minimum version of Microsoft .NET Framework required by this module. This prerequisite is valid for the PowerShell Desktop edition only and .NET Framework versions lower than 4.5
-# DotNetFrameworkVersion = ''
-
-# Minimum version of the .NET common language runtime (CLR) required by this module. This prerequisite is valid for the PowerShell Desktop edition only and only applies to .NET Framework versions lower than 4.5
-# CLRVersion = ''
-
-# Processor architecture (None, X86, Amd64) required by this module
-# ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
 RequiredModules = @(
@@ -101,28 +86,38 @@ AliasesToExport = @()
 ModuleList = @()
 
 # List of all files packaged with this module. For documentation/reference only
-FileList = @()
+FileList = @(
+    './LICENSE',
+    './structures/Display/Display.psm1',
+    './structures/Display/DisplayFormats.ps1xml',
+    './structures/Display/DisplayTypes.ps1xml',
+    './structures/Import.ps1',
+    './lib/Win32Interop/DisplayConfig.cs',
+    './lib/Win32Interop/DisplayDevices.cs',
+    './lib/Win32Interop/DisplaySettings.cs',
+    './lib/Win32Interop/Win32Errors.cs',
+    './WindowsDisplayManager.psd1',
+    './WindowsDisplayManager.psm1'
+)
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{
     PSData = @{
         # Tags applied to this module. These help with module discovery in online galleries.
         Tags = @(
-            'Display Settings',
-            'Monitor Settings',
             'Graphics',
             'Display',
             'Monitors'
         )
 
         # A URL to the license for this module.
-        # LicenseUri = 'https://github.com/patrick-theprogrammer/WindowsDisplayManager/blob/main/LICENSE'
+        LicenseUri = 'https://github.com/patrick-theprogrammer/WindowsDisplayManager/blob/main/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = 'https://github.com/patrick-theprogrammer/WindowsDisplayManager'
+        ProjectUri = 'https://github.com/patrick-theprogrammer/WindowsDisplayManager'
 
         # A URL to an icon representing this module.
-        # IconUri = 'https://github.com/patrick-theprogrammer/WindowsDisplayManager/blob/main/assets/logo.png?raw=true'
+        IconUri = 'https://github.com/patrick-theprogrammer/WindowsDisplayManager/blob/main/assets/logo.png?raw=true'
 
         # ReleaseNotes of this module
         # ReleaseNotes = ''
@@ -132,10 +127,4 @@ PrivateData = @{
 # HelpInfo URI of this module
 # TODO add developer API documentation for this module
 # HelpInfoURI = ''
-
-# Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
-# DefaultCommandPrefix = ''
 }
-
-
-
