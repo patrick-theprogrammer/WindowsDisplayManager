@@ -74,7 +74,6 @@ function _GetDisplay($index) {
         }
         return [Display]::new($index, $displayDevice)
     }
-    Write-PSFMessage -Level Debug -Message "Consistently failed to get display index $index- this indicates there are less than $($index+1) display sources"
     return $null
 }
 
@@ -311,20 +310,32 @@ function CurrentDisplaysAreSameAsStates() {
             }
         }
 
-        # If requested, fail if any currently enabled displays aren't in the file
-        if ($validateAllEnabledDisplaysSpecified -and $display.Enabled -and -not $matchingDisplayState) { return $false }
+        # If requested, fail if any currently enabled displays aren't present in the specified states
+        if ($validateAllEnabledDisplaysSpecified -and $display.Enabled -and -not $matchingDisplayState) {
+            Write-PSFMessage -Level Debug -Message "Enabled display $($display.Description) not present in specified states"
+            return $false
+        }
         # Fail if any current display states don't match enablement of any matching record in the file
-        if (($matchingDisplayState.Enabled -is "boolean") -and ($display.Enabled -ne $matchingDisplayState.Enabled)) { return $false }
-        if (-not $matchingDisplayState) { continue }
+        if (($matchingDisplayState.Enabled -is "boolean") -and ($display.Enabled -ne $matchingDisplayState.Enabled)) {
+            Write-PSFMessage -Level Debug -Message "Actual display enablement of $($display.Description) is not $($matchingDisplayState.Enabled)"
+            return $false
+        }
+        if (-not $matchingDisplayState.Enabled) { continue }
 
-        # Fail if resolution or hdr differ on any current display which is in the file
-        if ($display.HdrInfo.HdrEnabled -ne $matchingDisplayState.HdrInfo.HdrEnabled) { return $false }
+        # Fail if resolution or hdr differ on any current display which is in the specified states
+        if (($matchingDisplayState.HdrInfo.HdrEnabled -is "boolean") -and ($display.HdrInfo.HdrEnabled -ne $matchingDisplayState.HdrInfo.HdrEnabled)) {
+            Write-PSFMessage -Level Debug -Message "Actual display $($display.Description) HDR enablement is not $($matchingDisplayState.HdrInfo.HdrEnabled)"
+            return $false
+        }
         $displayResolution = $display.Resolution
         $refreshRateTolerance = 3 # Tolerance for when to consider a refresh rate close enough to be considered equivalent
-        if ($displayResolution.Width -ne $matchingDisplayState.Resolution.Width `
+        if (($null -ne $matchingDisplayState.Resolution) -and `
+                ($displayResolution.Width -ne $matchingDisplayState.Resolution.Width `
                 -or $displayResolution.Height -ne $matchingDisplayState.Resolution.Height `
-                -or ($displayResolution.RefreshRate -and [Math]::Abs($displayResolution.RefreshRate - $matchingDisplayState.Resolution.RefreshRate) -gt $refreshRateTolerance)) {
-            return $false
+                -or ($displayResolution.RefreshRate -and [Math]::Abs($displayResolution.RefreshRate - $matchingDisplayState.Resolution.RefreshRate) -gt $refreshRateTolerance))) {
+                    $matchingDisplayResolutionStr = "$($matchingDisplayState.Resolution.Width)x$($matchingDisplayState.Resolution.Height)@$($matchingDisplayState.Resolution.RefreshRate)fps"
+                    Write-PSFMessage -Level Debug -Message "Actual display $($display.Description) resolution is not $matchingDisplayResolutionStr)"
+                return $false
         }
     }
     return $true
